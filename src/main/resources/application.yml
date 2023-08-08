@@ -1,0 +1,44 @@
+spring:
+  #profile ??
+  profiles:
+    active: ${server.profile:local}
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    root: info
+    com.yj.velog: info
+
+server:
+  port: 8080
+
+--- #local
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    root: info
+    com.yj.velog: debug
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  #?? ?? ??
+    show-sql: true
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${db.url:jdbc:mysql://localhost/velog}
+      username: ${db.username:root}
+      password: ${db.password:verysecret}
+--- #dev
+--- #prod

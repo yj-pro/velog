@@ -1,5 +1,6 @@
 package com.yj.velog.board.domain.entity;
 
+import com.yj.velog.board.domain.dto.PutBoardDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,11 @@ public class Board {
     public static Board of(String subject, String content){
         LocalDateTime now = LocalDateTime.now();
         return new Board(subject, content, now, now);
+    }
+
+    public void put(PutBoardDto putBoardDto){
+        this.subject = putBoardDto.getSubject();
+        this.content = putBoardDto.getContent();
+        this.modifiedAt = LocalDateTime.now();
     }
 }

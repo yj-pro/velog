@@ -1,5 +1,6 @@
 package com.yj.velog.board.service;
 
+import com.yj.velog.board.domain.dto.PutBoardDto;
 import com.yj.velog.board.domain.dto.PostBoardDto;
 import com.yj.velog.board.domain.entity.Board;
 import com.yj.velog.board.domain.vo.BoardVo;
@@ -27,6 +28,18 @@ public class BoardServiceImpl implements BoardService{
         Board board = boardRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("유효하지 않은 게시글입니다.")
         );
+        return new BoardVo(board.getId(), board.getSubject(), board.getContent(), board.getCreatedAt(), board.getModifiedAt());
+    }
+
+    @Transactional
+    @Override
+    public BoardVo putBoard(PutBoardDto putBoardDto) {
+        Long boardId = putBoardDto.getBoardId();
+        Board board = boardRepository.findById(boardId).orElseThrow(() ->
+                new IllegalArgumentException("유효하지 않은 게시글입니다.")
+        );
+
+        board.put(putBoardDto);
         return new BoardVo(board.getId(), board.getSubject(), board.getContent(), board.getCreatedAt(), board.getModifiedAt());
     }
 }

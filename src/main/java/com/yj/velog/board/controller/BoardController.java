@@ -1,6 +1,7 @@
 package com.yj.velog.board.controller;
 
 import com.yj.velog.board.domain.dto.BoardDto;
+import com.yj.velog.board.domain.vo.BoardVo;
 import com.yj.velog.board.domain.vo.MessageVo;
 import com.yj.velog.board.service.BoardService;
 import com.yj.velog.common.api.Api;
@@ -9,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -28,7 +26,11 @@ public class BoardController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new Api<>("0000", "success", boardService.postBoard(boardDto)));
+                .body(new Api<>("0001", "success", boardService.postBoard(boardDto)));
     }
 
+    @GetMapping("/board/{board_id}")
+    public ResponseEntity<Api<BoardVo>> getBoard(@PathVariable(name = "board_id") Long boardId){
+        return ResponseEntity.ok(new Api<>("0000", "success", boardService.getBoard(boardId)));
+    }
 }

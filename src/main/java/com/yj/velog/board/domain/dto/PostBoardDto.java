@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDto {
+public class PostBoardDto {
 
     @NotNull(message = "subject 비어있을 수 없습니다.")
     @Length(min = 1, max = 50)

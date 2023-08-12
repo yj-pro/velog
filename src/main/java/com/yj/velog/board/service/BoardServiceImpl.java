@@ -1,6 +1,6 @@
 package com.yj.velog.board.service;
 
-import com.yj.velog.board.domain.dto.BoardDto;
+import com.yj.velog.board.domain.dto.PostBoardDto;
 import com.yj.velog.board.domain.entity.Board;
 import com.yj.velog.board.domain.vo.BoardVo;
 import com.yj.velog.board.domain.vo.MessageVo;
@@ -17,8 +17,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Transactional
     @Override
-    public MessageVo postBoard(BoardDto boardDto) {
-        boardRepository.save(Board.of(boardDto.getSubject(), boardDto.getContent()));
+    public MessageVo postBoard(PostBoardDto postBoardDto) {
+        boardRepository.save(Board.of(postBoardDto.getSubject(), postBoardDto.getContent()));
         return new MessageVo("게시글 등록 성공");
     }
 

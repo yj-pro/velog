@@ -1,7 +1,7 @@
 package com.yj.velog.board.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yj.velog.board.domain.dto.BoardDto;
+import com.yj.velog.board.domain.dto.PostBoardDto;
 import com.yj.velog.board.domain.entity.Board;
 import com.yj.velog.board.repository.BoardRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,11 +33,11 @@ class BoardControllerTest {
         //given
         String subject = "제목";
         String content = "내용";
-        BoardDto boardDto = new BoardDto(subject, content);
+        PostBoardDto postBoardDto = new PostBoardDto(subject, content);
         //when
         ResultActions perform = mockMvc.perform(
                 post("/api/v1/board").contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(boardDto))
+                        .content(objectMapper.writeValueAsString(postBoardDto))
         );
         //then
         perform.andExpect(status().is2xxSuccessful());

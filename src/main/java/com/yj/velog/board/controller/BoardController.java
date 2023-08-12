@@ -1,6 +1,6 @@
 package com.yj.velog.board.controller;
 
-import com.yj.velog.board.domain.dto.BoardDto;
+import com.yj.velog.board.domain.dto.PostBoardDto;
 import com.yj.velog.board.domain.vo.BoardVo;
 import com.yj.velog.board.domain.vo.MessageVo;
 import com.yj.velog.board.service.BoardService;
@@ -19,14 +19,14 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/board")
-    public ResponseEntity<Api<MessageVo>> postBoard(@RequestBody @Validated BoardDto boardDto, BindingResult bindingResult){
+    public ResponseEntity<Api<MessageVo>> postBoard(@RequestBody @Validated PostBoardDto postBoardDto, BindingResult bindingResult){
         // 나중에 aop로 빼야됨
         if(bindingResult.hasErrors()){
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new Api<>("0001", "success", boardService.postBoard(boardDto)));
+                .body(new Api<>("0001", "success", boardService.postBoard(postBoardDto)));
     }
 
     @GetMapping("/board/{board_id}")

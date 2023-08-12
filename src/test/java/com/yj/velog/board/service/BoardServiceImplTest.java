@@ -1,8 +1,5 @@
 package com.yj.velog.board.service;
 
-import com.yj.velog.board.domain.dto.BoardDto;
-import com.yj.velog.board.domain.entity.Board;
-import com.yj.velog.board.domain.vo.MessageVo;
 import com.yj.velog.board.repository.BoardRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

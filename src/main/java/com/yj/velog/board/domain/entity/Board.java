@@ -22,4 +22,16 @@ public class Board {
 
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+
+    private Board(String subject, String content, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+        this.subject = subject;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+    }
+
+    public static Board of(String subject, String content){
+        LocalDateTime now = LocalDateTime.now();
+        return new Board(subject, content, now, now);
+    }
 }

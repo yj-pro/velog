@@ -2,6 +2,7 @@ package com.yj.velog.board.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yj.velog.board.domain.dto.PostBoardDto;
+import com.yj.velog.board.domain.dto.PutBoardDto;
 import com.yj.velog.board.domain.entity.Board;
 import com.yj.velog.board.repository.BoardRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -56,6 +57,19 @@ class BoardControllerTest {
         perform.andExpect(status().is2xxSuccessful());
     }
 
-
+    @Test
+    @DisplayName("/api/v1/board (PUT)")
+    void putBoard() throws Exception{
+        //given
+        Board save = boardRepository.save(Board.of("제목2", "내용2"));
+        PutBoardDto putBoardDto = new PutBoardDto(save.getId(), "수정된 제목", "수정된 내용");
+        //when
+        ResultActions perform = mockMvc.perform(
+                put("/api/v1/board").contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(putBoardDto))
+        ).andDo(print());
+        //then
+        perform.andExpect(status().is2xxSuccessful());
+    }
 
 }

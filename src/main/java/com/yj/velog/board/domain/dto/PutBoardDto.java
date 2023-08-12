@@ -1,5 +1,6 @@
 package com.yj.velog.board.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PutBoardDto {
+    @JsonProperty("board_id")
     @NotNull(message = "board_id 비어있을 수 없습니다.")
     private Long boardId;
     @NotNull(message = "subject 비어있을 수 없습니다.")

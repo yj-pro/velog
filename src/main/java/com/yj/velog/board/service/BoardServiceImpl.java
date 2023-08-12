@@ -5,7 +5,9 @@ import com.yj.velog.board.domain.entity.Board;
 import com.yj.velog.board.domain.vo.MessageVo;
 import com.yj.velog.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public final class BoardServiceImpl implements BoardService{
     private final BoardRepository boardRepository;

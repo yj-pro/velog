@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class BoardVo {
-    private Long id;
-    private String subject;
-    private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
-}
+public record BoardVo(
+        Long boardId,
+        String subject,
+        String content,
+        LocalDateTime createdAt,
+        LocalDateTime modifiedAt
+) {}

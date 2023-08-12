@@ -12,8 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @ExtendWith(MockitoExtension.class)
 class BoardServiceImplTest {
@@ -24,17 +23,13 @@ class BoardServiceImplTest {
     private BoardRepository boardRepository;
 
     @Test
-    @DisplayName("게시글 등록 성공")
-    void postBoardSuccess(){
+    @DisplayName("게시글 불러오기 실패")
+    void getBoardFail1(){
         //given
-        String subject = "제목";
-        String content = "내용";
-        BoardDto boardDto = new BoardDto(subject, content);
-        given(boardRepository.save(any())).willReturn(Board.of(subject, content));
-
         //when
-        MessageVo messageVo = boardService.postBoard(boardDto);
+        Throwable throwable = catchThrowable(() -> boardService.getBoard(0L));
         //then
-        Assertions.assertThat(messageVo.detail()).contains("성공");
+        Assertions.assertThat(throwable).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("유효하지 않은 게시글");
     }
 }
